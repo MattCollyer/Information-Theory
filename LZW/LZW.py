@@ -85,18 +85,12 @@ def uncoded_to_bit_str_fixed(stream, max_bit_len = 7):
   return bit_stream
 
 
-
-
-
 def percent_decrease(original, new):
   return round( ((original - new) /original) * 100, 2)
 
 def summary(stream, max_bit_len = 10):
   encoded = encode_lzw(stream, max_bit_len)
   decoded = decode_lzw(encoded, max_bit_len)
-
-
-  
   print('\n\n\n-------------------------------------')
 
   if(stream == decoded):
@@ -105,15 +99,16 @@ def summary(stream, max_bit_len = 10):
     print("Stream was not successfully encoded and decoded")
 
   original_bit_length = len(uncoded_to_bit_str_fixed(stream))
+  
 
+  new_size_fixed = len(encoded_to_bit_str_fixed(encoded, max_bit_len))
+  new_size_variable = len(encoded_to_bit_str_variable(encoded))
 
-  new_size = len(encoded_to_bit_str_fixed(encoded, max_bit_len))
-
-
-  print("IF USING FIXED LENGTH:")
   print("Amount of bits using ASCII:", original_bit_length)
-  print("Amount of bits using LZW :", new_size)
-  print("With this codex, the original text can be shrunk by ", percent_decrease(original_bit_length, new_size), 'percent')
+  print("Amount of bits using FIXED LENGTH LZW :", new_size_fixed)
+  print("With this fixed length codex, the original text can be shrunk by ", percent_decrease(original_bit_length, new_size_fixed), 'percent')
+  print("Amount of bits using VARIABLE LENGTH LZW:", new_size_variable)
+  print("With this variable length codex, the original text can be shrunk by ", percent_decrease(original_bit_length, new_size_variable), 'percent')
   print('-------------------------------------\n\n\n')
 
 
