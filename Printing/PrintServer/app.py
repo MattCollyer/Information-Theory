@@ -24,7 +24,6 @@ def add_message(message, ip):
   	user='kingrat',
 		database= 'messages'
 	)
-	
 	cursor = db.cursor()
 	sql = "INSERT INTO sent (Message, IP) VALUES (%s, %s)"
 	val = (message, ip)
